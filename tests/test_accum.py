@@ -1,21 +1,25 @@
 import pytest
 from stuff.accum import Accumlator
 
-def test_accumulator_init():
-    accum = Accumlator()
+
+@pytest.mark.accum
+def test_accumulator_init(accum):
     assert accum.count == 0
 
-def test_accumulator_add_one():
-    accum = Accumlator()
-    accum.add()
-    assert accum.count == 1
 
-def test_accumulator_add_three():
-    accum = Accumlator()
+@pytest.mark.accum
+def test_accumulator_add_one(accum2):
+    accum2.add()
+    assert accum2.count == 1
+
+
+@pytest.mark.accum
+def test_accumulator_add_three(accum):
     accum.add(3)
     assert accum.count == 3
 
-def test_accumulator_readonly():
-    accum = Accumlator()
-    with pytest.raises(AttributeError,match=r"can't set attribute"):
-        accum.count= 10
+
+@pytest.mark.accum
+def test_accumulator_readonly(accum):
+    with pytest.raises(AttributeError, match=r"can't set attribute"):
+        accum.count = 10
